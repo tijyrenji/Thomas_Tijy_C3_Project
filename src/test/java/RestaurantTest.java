@@ -68,4 +68,38 @@ class RestaurantTest {
                 ()->restaurant.removeFromMenu("French fries"));
     }
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>> ORDER <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+    @Test
+    public void calculate_order_Total_should_return_correct_price_when_one_item_is_added(){
+        restaurant.addToMenu("Sizzling brownie",319);
+        String item1 = "Sizzling brownie";
+        assertEquals(319,restaurant.calculateOrderTotal("Sizzling brownie"));
+    }
+
+    @Test
+    public void calculate_order_Total_should_return_correct_price_when_multiple_items_are_added() {
+        restaurant.addToMenu("Sizzling brownie",319);
+        String item1 = "Sizzling brownie";
+        String item2 = "Sweet corn soup";
+        assertEquals(319+119,restaurant.calculateOrderTotal("Sizzling brownie", "Sweet corn soup"));
+    }
+
+    @Test
+    public void calculate_order_Total_should_return_correct_price_when_item_is_removed() {
+        restaurant.addToMenu("Sizzling brownie",319);
+        String item1 = "Sizzling brownie";
+        String item2 = "Sweet corn soup";
+        assertEquals(319+119,restaurant.calculateOrderTotal("Sizzling brownie", "Sweet corn soup"));
+        //Assert after removing "Sizzling brownie" from order
+        assertEquals(119,restaurant.calculateOrderTotal( "Sweet corn soup"));
+    }
+
+    @Test
+    public void calculate_order_Total_should_return_zero_price_when_no_item_is_selected() {
+        assertEquals(0,restaurant.calculateOrderTotal());
+    }
+
+    //<<<<<<<<<<<<<<<<<<<<<<< ORDER >>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 }
