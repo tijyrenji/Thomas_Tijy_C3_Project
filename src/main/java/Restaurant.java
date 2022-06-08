@@ -49,6 +49,7 @@ public class Restaurant {
 
         menu.remove(itemToBeRemoved);
     }
+
     public void displayDetails(){
         System.out.println("Restaurant:"+ name + "\n"
                 +"Location:"+ location + "\n"
@@ -60,6 +61,19 @@ public class Restaurant {
 
     public String getName() {
         return name;
+    }
+
+    public int calculateOrderTotal(String... selectedItems) {
+        int orderTotal = 0;
+        if(selectedItems.length>0){
+            for (String itemName:selectedItems) {
+                /* not handling exception here as per the Task description ,
+                stating selectedItem will always be available in menu */
+                Item item = findItemByName(itemName);
+                orderTotal += item.getPrice();
+            }
+        }
+        return orderTotal;
     }
 
 }
